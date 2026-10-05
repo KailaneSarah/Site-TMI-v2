@@ -322,9 +322,10 @@ section{scroll-margin-top:90px}
 .vlayer .cap{position:absolute;left:18px;right:18px;bottom:18px;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
 .vlayer .cap b{font:500 20px/1.2 var(--head);display:block;color:#fff}
 .vlayer .cap span{font-size:14px;color:rgba(255,255,255,.9)}
-.vlayer .play{width:52px;height:52px}
-.vlayer .play svg{width:18px;height:18px}
-.print{margin:0;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.vlayer .skip{position:relative;z-index:4;flex:none;display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.55);background:rgba(18,12,28,.35);color:#fff;font:500 15px/1 var(--body);cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .3s}
+.vlayer .skip:hover{background:var(--cta);border-color:var(--cta)}
+.vlayer .skip .ic{width:18px;height:18px}
+.print{margin:0;background:#E6F2FF;border:1px solid var(--border);border-radius:var(--r);padding:14px}
 .print .bar{display:flex;align-items:center;gap:10px;padding:4px 4px 12px;border-bottom:1px solid var(--border)}
 .print .av{width:40px;height:40px;border-radius:50%;flex:none;overflow:hidden}
 .print .nm{display:grid;gap:1px}
@@ -341,7 +342,7 @@ section{scroll-margin-top:90px}
 .bub .by time{margin:0}
 .bub{justify-self:start;max-width:92%;background:var(--bg);border-radius:4px var(--r) var(--r) var(--r);padding:10px 14px;font-size:16px;line-height:1.5;color:var(--ink)}
 .bub-img{max-width:100%;padding:10px 12px}
-.bub-img{width:100%;justify-self:stretch}
+.bub-img{width:100%;justify-self:stretch;background:#FFFFFF;border:1px solid var(--border)}
 .bub-img img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
 .bub time{display:block;text-align:right;font-size:12px;color:var(--ink-2);margin-top:2px}
 .print .re{justify-self:end;background:var(--cta);color:#fff;border-radius:var(--r) 4px var(--r) var(--r);padding:8px 14px;font-size:15px}
@@ -363,7 +364,7 @@ section{scroll-margin-top:90px}
   .fb-track.drag{transition:none}
   .fb-track .print{flex:0 0 100%;height:340px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center}
   .fb-track .print .msgs{flex:0 0 auto}
-  .fb-track .print{background:rgba(251,251,251,.45);border:1px solid rgba(103,37,132,.08)}
+  .fb-track .print{background:#E6F2FF;border:1px solid var(--border)}
   .fb-track .print .stars{justify-content:center;padding:2px 0 4px}
   .fb-track .print .msgs{padding:12px 0 0;justify-items:center;width:100%}
   .fb-track .print .bub-img{width:fit-content;max-width:100%;justify-self:center;margin-inline:auto;padding:12px 14px;border-radius:var(--r)}
@@ -779,13 +780,13 @@ html,body{overflow-x:clip}
             </div>
             <!-- Preencha data-src de cada vídeo com o arquivo do relato -->
             <div class="vlayer on"><canvas data-scene="forest"></canvas><video data-src="" playsinline muted preload="metadata"></video><div class="shade"></div>
-              <div class="cap"><div><b>Relato em vídeo</b><span>1 de 4</span></div><button class="play" aria-label="Assistir com som"><svg><use href="#i-play"/></svg></button></div></div>
+              <div class="cap"><div><b>Relato em vídeo</b><span>1 de 4</span></div><button class="skip" type="button" aria-label="Pular para o próximo relato">Pular <svg class="ic"><use href="#i-arrow"/></svg></button></div></div>
             <div class="vlayer"><canvas data-scene="morning"></canvas><video data-src="" playsinline muted preload="metadata"></video><div class="shade"></div>
-              <div class="cap"><div><b>Relato em vídeo</b><span>2 de 4</span></div><button class="play" aria-label="Assistir com som"><svg><use href="#i-play"/></svg></button></div></div>
+              <div class="cap"><div><b>Relato em vídeo</b><span>2 de 4</span></div><button class="skip" type="button" aria-label="Pular para o próximo relato">Pular <svg class="ic"><use href="#i-arrow"/></svg></button></div></div>
             <div class="vlayer"><canvas data-scene="dusk"></canvas><video data-src="" playsinline muted preload="metadata"></video><div class="shade"></div>
-              <div class="cap"><div><b>Relato em vídeo</b><span>3 de 4</span></div><button class="play" aria-label="Assistir com som"><svg><use href="#i-play"/></svg></button></div></div>
+              <div class="cap"><div><b>Relato em vídeo</b><span>3 de 4</span></div><button class="skip" type="button" aria-label="Pular para o próximo relato">Pular <svg class="ic"><use href="#i-arrow"/></svg></button></div></div>
             <div class="vlayer"><canvas data-scene="dawn"></canvas><video data-src="" playsinline muted preload="metadata"></video><div class="shade"></div>
-              <div class="cap"><div><b>Relato em vídeo</b><span>4 de 4</span></div><button class="play" aria-label="Assistir com som"><svg><use href="#i-play"/></svg></button></div></div>
+              <div class="cap"><div><b>Relato em vídeo</b><span>4 de 4</span></div><button class="skip" type="button" aria-label="Pular para o próximo relato">Pular <svg class="ic"><use href="#i-arrow"/></svg></button></div></div>
           </div>
         </div>
 
@@ -1065,7 +1066,7 @@ document.getElementById('playBtn').addEventListener('click', e => {
 
 /* ---------- Vídeos dos depoimentos ---------- */
 const layers = [...document.querySelectorAll('.vlayer')], segs = [...document.querySelectorAll('#segs button')];
-layers.forEach(l => { const v = l.querySelector('video'); l._has = prepVideo(v); l.querySelector('.play').addEventListener('click', e => { e.stopPropagation(); if(l._has){ v.muted = !v.muted; v.play().catch(()=>{}); } }); });
+layers.forEach(l => { const v = l.querySelector('video'); l._has = prepVideo(v); l.querySelector('.skip').addEventListener('click', e => { e.stopPropagation(); const k = (layers.indexOf(l) + 1) % layers.length; if(storyMode()) show(k); else if(window.scrollToStory) window.scrollToStory(k); else show(k); }); });
 let cur = -1, elapsed = 0, holding = false, inView = false, lastT = 0;
 const mqMobile = window.matchMedia('(max-width: 900px)');
 let scrollMode = false; // desktop com GSAP: troca pelo scroll
